@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            height: 200px;
+            width: 300px;
+            border: 1px solid black;
+        }
+
+        .box1 {
+            border-style: dashed;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box1" id="d">box1</div>
+<hr>
+<div class="box2">box2</div>
+<script type="text/javascript">
+    function btn() {
+        for (var x in 10) {
+            console.log(x)
+        }
+    }
+
+    let d = document.getElementById('d')
+    d.addEventListener('click', btn);
+</script>
+</body>
+</html>
