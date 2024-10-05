@@ -4,15 +4,16 @@ import {onBeforeMount, reactive, ref} from "vue";
 import {useMatrix} from "./store/matrixStore.js";
 import {isJoin} from "./utils/isJoin.js"
 import {move} from "./utils/move.js";
-import {judge} from "./utils/judge.js";
+import {search} from "./utils/search.js";
 
 // 棋盘矩阵
 const useMatrixStore = useMatrix()
+const matrix = useMatrix().matrix
 
 // 固定矩阵行列号
-const matrix = reactive({
-  row: 7,
-  col: 12
+const matrixSize = reactive({
+  row: 11,
+  col: 14
 })
 
 // 两次点击对象
@@ -43,23 +44,23 @@ onBeforeMount(() => {
 
 function click() {
   ++cnt.value
-  console.log(`pos: (${currentPos.y},${currentPos.x})`, cnt.value)
+  // console.log(`pos: (${currentPos.y},${currentPos.x})`, cnt.value)
 
   // cnt % 2为偶数时为第一次点击，反之代表一轮选择结束
   if (cnt.value % 2) {
     clickObj1.y = currentPos.y
     clickObj1.x = currentPos.x
-    console.log(useMatrix().matrix)
+    // console.log(matrix)
   } else {
     clickObj2.y = currentPos.y
     clickObj2.x = currentPos.x
     if (isJoin(clickObj1, clickObj2)) {
-      console.log('是相邻元素')
-      console.log(useMatrix().matrix)
+      // console.log('是相邻元素')
+      // console.log(matrix)
       move(clickObj1, clickObj2)
-      judge(clickObj1.y, clickObj1.x)
-      judge(clickObj2.y, clickObj2.x)
-    }else {
+      search(clickObj1.y, clickObj1.x)
+      search(clickObj2.y, clickObj2.x)
+    } else {
       // console.log('非相邻元素')
     }
   }
@@ -69,8 +70,8 @@ function click() {
 <template>
   <div class="shell" @click="cnt=0">
     <div class="container">
-      <template v-for="y in matrix.row">
-        <item v-for="x in matrix.col" :id="useMatrixStore.matrix[y-1][x-1]"
+      <template v-for="y in matrixSize.row">
+        <item v-for="x in matrixSize.col" v-show="matrix[y-1][x-1]!==-1" :id="matrix[y-1][x-1]"
               @click.stop="
               currentPos.y = y-1; currentPos.x = x-1;
               click();"

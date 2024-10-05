@@ -425,6 +425,11 @@ less@^4.2.0:
     needle "^3.1.0"
     source-map "~0.6.0"
 
+loadsh@^0.0.4:
+  version "0.0.4"
+  resolved "https://r2.cnpmjs.org/loadsh/-/loadsh-0.0.4.tgz#5314babd12bb13315dde024a4ca70758c5489d2d"
+  integrity sha512-U+wLL8InpfRalWrr+0SuhWgGt10M4OyAk6G8xCYo2rwpiHtxZkWiFpjei0vO463ghW8LPCdhqQxXlMy2qicAEw==
+
 magic-string@^0.30.11:
   version "0.30.11"
   resolved "https://r.cnpmjs.org/magic-string/-/magic-string-0.30.11.tgz#301a6f93b3e8c2cb13ac1a7a673492c0dfd12954"
