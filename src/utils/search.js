@@ -1,48 +1,57 @@
 import {useMatrix} from "../store/matrixStore.js";
 import {reborn} from "./reborn.js";
-import {isEqual} from "./isEqual.js";
+import {useScore} from "../store/scoreStore.js";
 
 export function search(y, x) {
-    const matrix = useMatrix().matrix
+    const useMatrixStore = useMatrix()
+    const matrix = useMatrixStore.matrix
+    const useScoreStore = useScore()
+    const arr = []
+    const status = [
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+        [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+    ];
 
-    //单向两格查
-    if (isEqual(matrix[y][x], matrix[y - 1][x], matrix[y - 2][x])) {
-        console.log(1)
-        reborn(y, x)
-        reborn(y - 1, x)
-        reborn(y - 2, x)
-    }
-    if (isEqual(matrix[y][x], matrix[y + 1][x], matrix[y + 2][x])) {
-        console.log(2)
-        reborn(y, x)
-        reborn(y + 1, x)
-        reborn(y + 2, x)
-    }
-    if (isEqual(matrix[y][x], matrix[y][x - 1], matrix[y][x - 2])) {
-        console.log(3)
-        reborn(y, x)
-        reborn(y, x - 1)
-        reborn(y, x - 2)
-    }
-    if (isEqual(matrix[y][x], matrix[y][x + 1], matrix[y][x + 2])) {
-        console.log(4)
-        reborn(y, x)
-        reborn(y, x + 1)
-        reborn(y, x + 2)
+    const dfs = function (y, x, value) {
+        const dy = [-1, 0, 1, 0]
+        const dx = [0, 1, 0, -1]
+        const rowSize = matrix.length
+        const colSize = matrix[0].length
+
+        // 矩阵溢出判断
+        if (y < 0 || y > rowSize || x < 0 || x > colSize) return
+        // console.log(y, x)
+        // console.log(status[y][x])
+        //方块相同且此坐标未被遍历
+        if (matrix[y][x] === value && !status[y][x]) {
+            // console.log('dfs: ', y + 3, x + 3)
+            //改变坐标遍历状态
+            status[y][x] = true
+            arr.push({y: y, x: x})
+            for (let i = 0; i < 4; i++) {
+                dfs(y + dy[i], x + dx[i], matrix[y][x])
+            }
+        }
     }
 
-    //水平相邻查
-    if (isEqual(matrix[y][x], matrix[y][x - 1], matrix[y][x + 1])) {
-        console.log(5)
-        reborn(y, x)
-        reborn(y, x - 1)
-        reborn(y, x + 1)
-    }
-    //垂直相邻查
-    if (isEqual(matrix[y][x], matrix[y - 1][x], matrix[y + 1][x])) {
-        console.log(6)
-        reborn(y, x)
-        reborn(y - 1, x)
-        reborn(y + 1, x)
+    // console.log('enter search()', `y: ${y - 1}, x: ${x - 1}`)
+    dfs(y, x, matrix[y][x])
+    if (arr.length >= 3) {
+        ++useScoreStore.score
+        console.log('arr.length >= 3')
+        for (let element of arr) {
+            console.log(`y: ${element.y - 1}, x: ${element.x - 1}`)
+            // console.log(element.y, element.x)
+            reborn(element.y, element.x)
+        }
     }
 }
