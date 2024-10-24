@@ -38,13 +38,7 @@ const currentPos = {
 
 let cnt = ref(0)
 
-onBeforeMount(() => {
-  if (useMatrixStore.isInitiated === false) {
-    console.log('false')
-    useMatrixStore.fullMatrix()
-    useMatrixStore.isInitiated = true
-  }
-})
+useMatrixStore.fullMatrix()
 
 function click(y, x) {
   currentPos.y = y;
@@ -100,6 +94,8 @@ function click(y, x) {
   height: 100vh;
   width: 100vw;
   background-color: antiquewhite;
+  //background: url("../public/bcg.png");
+  //background: url("https://w.wallhaven.cc/full/zm/wallhaven-zmm86g.jpg");
   display: flex;
   flex-direction: column;
   justify-content: center;
