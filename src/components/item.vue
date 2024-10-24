@@ -6,7 +6,7 @@ defineProps({
 
 // 工具函数，用于获取静态资源的完整路径
 function getAssetImage(imgSrc) {
-  return new URL(`../assets/p${imgSrc}.png`, import.meta.url).href;
+  return new URL(`../../public/img/p${imgSrc}.png`, import.meta.url).href;
 }
 </script>
 
