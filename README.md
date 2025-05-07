@@ -1,5 +1,70 @@
-# Vue 3 + Vite
+# 方块消消乐游戏
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 项目简介
+方块消消乐是一款经典的休闲益智游戏，本项目使用 Vue 3 框架和 Vite 构建工具，结合 Pinia 进行状态管理，实现了一个功能完整且具有良好交互体验的方块消消乐游戏。玩家通过点击交换相邻方块的位置，使三个或以上相同方块连成一线即可消除，从而获得分数。
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## 功能特性
+- **随机矩阵初始化**：游戏开始时，矩阵会随机填充方块，且避免初始状态出现可消除组合。
+- **方块交换与消除**：玩家可点击相邻方块进行交换，若交换后形成三个或以上相同方块相连则消除，并增加得分。
+- **方块重生**：消除方块后，会随机生成新的方块填充空位，确保新方块不会立即形成可消除组合。
+- **得分系统**：每成功消除一组方块，得分增加，得分实时显示在界面上。
+- **动画效果**：为方块的消除和重生添加了过渡动画，提升游戏的视觉体验。
+
+## 技术栈
+- **前端框架**：Vue 3，使用 `<script setup>` 语法糖，提高代码可读性和可维护性。
+- **状态管理**：Pinia，实现矩阵状态和得分状态的集中管理。
+- **构建工具**：Vite，提供快速的开发服务器和高效的打包功能。
+
+## 项目结构
+```
+Blocks/
+├── public/                  # 静态资源文件夹
+│   ├── img/                 # 方块图片
+│   └── font/                # 字体文件
+├── src/                     # 源代码文件夹
+│   ├── components/          # 组件文件夹
+│   │   └── item.vue         # 方块组件
+│   ├── store/               # 状态管理文件夹
+│   │   ├── matrixStore.js   # 矩阵状态管理
+│   │   └── scoreStore.js    # 得分状态管理
+│   ├── utils/               # 工具函数文件夹
+│   │   ├── isEqual.js       # 判断元素是否相等
+│   │   ├── isJoin.js        # 判断两个方块是否相邻
+│   │   ├── move.js          # 方块交换函数
+│   │   ├── reborn.js        # 方块重生函数
+│   │   ├── search.js        # 查找可消除方块函数
+│   │   ├── dfs.js           # 深度优先搜索函数
+│   │   └── getRandomNumberInclusive.js # 生成随机数函数
+│   ├── test/                # 测试文件夹
+│   │   └── t-01.html        # 测试文件
+│   ├── App.vue              # 根组件
+│   ├── main.js              # 入口文件
+│   └── style.css            # 全局样式文件
+├── index.html               # 入口 HTML 文件
+├── package.json             # 项目依赖和脚本配置
+├── vite.config.js           # Vite 配置文件
+└── README.md                # 项目说明文档
+```
+
+## 安装与运行
+### 安装依赖
+```bash
+npm install
+```
+
+### 开发环境运行
+```bash
+yarn run dev
+```
+运行后，打开浏览器访问 `http://localhost:5173` 即可开始游戏。
+
+### 项目打包
+```bash
+yarn run build
+```
+打包后的文件会生成在 `dist` 文件夹中。
+
+### 预览打包文件
+```bash
+yarn run preview
+```
