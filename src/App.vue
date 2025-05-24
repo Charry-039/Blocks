@@ -1,6 +1,6 @@
 <script setup>
 import item from './components/item.vue'
-import {onBeforeMount, reactive, ref} from "vue";
+import {reactive, ref} from "vue";
 import {useMatrix} from "./store/matrixStore.js";
 import {useScore} from "./store/scoreStore.js";
 import {isJoin} from "./utils/isJoin.js"
@@ -16,8 +16,8 @@ let {score} = storeToRefs(useScoreStore)
 
 // 固定矩阵行列号
 const matrixSize = reactive({
-  row: 11,
-  col: 16
+  row: matrix.length,
+  col: matrix[0].length,
 })
 
 // 两次点击对象

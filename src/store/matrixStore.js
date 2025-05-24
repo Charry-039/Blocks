@@ -20,16 +20,23 @@ export const useMatrix = defineStore('useMatrix', {
         }
     ), getters: {}, actions: {
         fullMatrix: function () {
-// 初始化随机填充矩阵
+            // 初始化随机填充矩阵
             let dy = [-1, 0, 1, 0]
             let dx = [0, 1, 0, -1]
+            for (let i = 0; i < this.matrix.length; i++) {
+                for (let j = 0; j < this.matrix[0].length; j++) {
+                    if (this.matrix[i][j] !== -1) {
+                        this.matrix[i][j] = getRandomNumberInclusive(1, 18)
+                    }
+                }
+            }
+
             for (let i = 0; i < this.matrix.length; i++) {
                 for (let j = 0; j < this.matrix[0].length; j++) {
                     // 边界不进行初始化赋值
                     if (this.matrix[i][j] === -1) {
                         continue
                     }
-                    this.matrix[i][j] = getRandomNumberInclusive(1, 18)
                     // 相同元素计数器
                     let cnt
                     do {
@@ -39,10 +46,13 @@ export const useMatrix = defineStore('useMatrix', {
                             let rx = j + dx[k]
                             if (this.matrix[ry][rx] === this.matrix[i][j]) {
                                 ++cnt
+                                console.log(`cnt: ${cnt}`)
                             }
                         }
-                        // 重随元素
-                        this.matrix[i][j] = getRandomNumberInclusive(1, 18)
+                        if (cnt > 1){
+                            this.matrix[i][j] = getRandomNumberInclusive(1, 18)
+                            console.log('cnt > 1')
+                        }
                     } while (cnt > 1)
                 }
             }
