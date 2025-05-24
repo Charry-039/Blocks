@@ -141,14 +141,14 @@ function click(y, x) {
   font-family: 'PixelMplus10-Regular';
   font-style: normal;
   font-weight: 400;
-  src: url('../public/font/PixelMplus10-Regular.ttf');
+  src: url('../font/PixelMplus10-Regular.ttf');
 }
 
 @font-face {
   font-family: 'PixelMplus10-Bold';
   font-style: normal;
   font-weight: 400;
-  src: url('../public/font/PixelMplus10-Bold.ttf');
+  src: url('../font/PixelMplus10-Bold.ttf');
 }
 
 .score > span {
