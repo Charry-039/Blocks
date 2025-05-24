@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/howler": "^2.2.12",
+    "howler": "^2.2.4",
     "lodash-es": "^4.17.21",
     "vue": "^3.4.37"
   },
@@ -18,5 +20,6 @@
     "loadsh": "^0.0.4",
     "pinia": "^2.2.4",
     "vite": "^5.4.1"
-  }
+  },
+  "packageManager": "yarn@3.8.7"
 }
