@@ -46,7 +46,8 @@ export function search(y, x) {
     // console.log('enter search()', `y: ${y - 1}, x: ${x - 1}`)
     dfs(y, x, matrix[y][x])
     if (arr.length >= 3) {
-        ++useScoreStore.score
+        // ++useScoreStore.score
+        useScoreStore.addScore()
         console.log('arr.length >= 3')
         for (let element of arr) {
             console.log(`y: ${element.y - 1}, x: ${element.x - 1}`)
